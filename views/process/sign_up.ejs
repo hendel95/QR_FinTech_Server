@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+
+    <% include core.ejs %>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please Sign Up</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-signin" method="post" action="/process/signup">
+                        <h2 class="form-signin-heading">회원 정보를 입력해 주십시오 </h2>
+                        <br/>
+                        <div class="form-group">
+                            <label for="inputEmail" class="sr-only">Email address</label>
+                            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="이메일 주소" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="sr-only">Password</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="비밀번호" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName" class="sr-only">Name</label>
+                            <input type="text" name="name" id="inputName" class="form-control" placeholder="이름" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTel" class="sr-only">Phone</label>
+                            <input type="tel" name="phone" id="inputTel" class="form-control" placeholder="전화번호" required>
+                        </div>
+                        <div class="form-group">
+                            <select id="DisableSelect" class="form-control">
+                                <option>소비자</option>
+                                <option>판매자</option>
+                            </select>
+                        </div>
+
+
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">회원 가입</button>
+                        <br/>
+                        <a href="/">로그인 화면</a>
+                        <br/>
+                        <p style="padding: 2px; color: red"> 메세지  </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+
+</html>

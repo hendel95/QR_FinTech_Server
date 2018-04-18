@@ -21,12 +21,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/about', function(req, res, next) {
+    res.render('about');
+});
+app.use('/products', function(req, res, next) {
+    res.render('products');
+});
+app.use('/store', function(req, res, next) {
+    res.render('store');
+});
+app.use('/process/login', function(req, res, next) {
+    res.render('process/login.ejs');
+});
+app.use('/process/sign_up', function(req, res, next) {
+    res.render('process/sign_up.ejs');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
