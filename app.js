@@ -31,9 +31,6 @@ var passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session()); //로그인 세션 유지
 
-require('./config/passport');
-
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -56,12 +53,17 @@ app.use('/store', function(req, res, next) {
     res.render('store');
 });
 
-app.use('/user', function(req, res, next) {
+app.use('/user',isLoggedIn, function(req, res, next) {
     res.render('dashboard/user');
 });
 
 app.use('/sign_up', function(req, res, next) {
     res.render('process/sign_up.ejs', {message : ''});
+});
+
+app.use('/logout', function(req, res, next) {
+    req.logout();
+    res.redirect('/');
 });
 
 // catch 404 and forward to error handler
@@ -79,6 +81,14 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
+function isLoggedIn(req,res,next)
+{
+    console.log('isloggedin 호출됨');
+    if(req.isAuthenticated())
+    {
+        return next();
+    }
+    res.redirect('/');
+}
 
 module.exports = app;
