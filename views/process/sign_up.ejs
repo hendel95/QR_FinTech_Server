@@ -13,6 +13,31 @@
 
     <% include core.ejs %>
 
+
+    <!-- 아이디 중복 확인용 ajax -->
+    <script type="text/javascript">
+        $(document).on('click','#checkBtn',function(){
+            var id = $('#inputEmail').val();
+            if(id == "" )
+            {
+                $('#result').html('이메일을 입력하시오');
+                return false;
+            }
+
+            $.ajax({
+                url : '/id_check',
+                dataType: 'json',
+                type : 'POST',
+                data : {'id':id },
+                success : function(result){
+                    if(result.result == true){
+                        $('#result').html(result.check);
+                    }
+                }
+            })
+        });
+    </script>
+
 </head>
 
 <body>
@@ -25,13 +50,23 @@
                     <h3 class="panel-title">Please Sign Up</h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-signin" enctype="multipart/form-data" method="post" action="/upload">
+
+                    <form class="form-signin" enctype="multipart/form-data" method="post" action="/upload/profile">
                         <h2 class="form-signin-heading">회원 정보를 입력해 주십시오 </h2>
                         <br/>
                         <div class="form-group">
-                            <label for="inputEmail" class="sr-only">Email address</label>
-                            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="이메일 주소" required autofocus>
+                                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="이메일 주소" required autofocus>
                         </div>
+                        <div class="form-group">
+
+                            <a href="#" id="checkBtn">
+                                <div>
+                                    <i class="fa fa-check fa-fw" id="checkBtn" ></i> 이메일 중복 확인
+                                    <span class="pull-right text-muted small" id="result">중복 확인 버튼을 눌러주세요</span>
+                                </div>
+                            </a>
+                        </div>
+
                         <div class="form-group">
                             <label for="inputPassword" class="sr-only">Password</label>
                             <input type="password" name="password" id="inputPassword" class="form-control" placeholder="비밀번호" required>
@@ -50,14 +85,17 @@
                                 <option>판매자</option>
                             </select>
                         </div>
-                        <input type="file" name="myfile" />
-
-
+                        <div class="form-group">
+                            <input type="file" name="myfile" />
+                            <label> 프로필 사진 등록 (3MB 이하) </label>
+                        </div>
                         <button class="btn btn-lg btn-primary btn-block" type="submit">회원 가입</button>
                         <br/>
                         <a href="/">로그인 화면</a>
                         <br/>
-                        <p style="padding: 2px; color: red"> 메세지  </p>
+
+                        <p style="padding: 2px; color: red"> <%= message %>  </p>
+
                     </form>
                 </div>
             </div>

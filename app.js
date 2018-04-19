@@ -5,15 +5,34 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var fileUpload = require('./fileUpload/fileUpload');
+var fileUpload = require('./routes/fileUpload');
+var idCheck = require('./routes/id_check');
+var loginRouter = require('./routes/login');
 
 var app = express();
+
+
 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+var session = require('express-session');
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
+
+var passport = require('passport');
+
+app.use(passport.initialize());
+app.use(passport.session()); //로그인 세션 유지
+
+require('./config/passport');
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -23,8 +42,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/upload',fileUpload);
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/upload', fileUpload);
+app.use('/id_check', idCheck);
+app.use('/login', loginRouter);
+
 app.use('/about', function(req, res, next) {
     res.render('about');
 });
@@ -34,14 +55,14 @@ app.use('/products', function(req, res, next) {
 app.use('/store', function(req, res, next) {
     res.render('store');
 });
-app.use('/process/login', function(req, res, next) {
-    res.render('process/login.ejs');
-});
-app.use('/process/sign_up', function(req, res, next) {
-    res.render('process/sign_up.ejs');
+
+app.use('/user', function(req, res, next) {
+    res.render('dashboard/user');
 });
 
-
+app.use('/sign_up', function(req, res, next) {
+    res.render('process/sign_up.ejs', {message : ''});
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

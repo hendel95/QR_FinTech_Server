@@ -1,6 +1,6 @@
-CREATE SCHEMA `dbg_db` ;
+CREATE SCHEMA `dgb_db` ;
 
-CREATE TABLE `dbg_db`.`user` (
+CREATE TABLE `dgb_db`.`user` (
   `num` INT NOT NULL AUTO_INCREMENT,
   `id` VARCHAR(45) NOT NULL,
   `pw` VARCHAR(45) NOT NULL,
@@ -10,5 +10,5 @@ CREATE TABLE `dbg_db`.`user` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   UNIQUE INDEX `num_UNIQUE` (`num` ASC));
 
-ALTER TABLE `dbg_db`.`user`
+ALTER TABLE `dgb_db`.`user`
 ADD COLUMN `phone_number` VARCHAR(45) NULL AFTER `type`;

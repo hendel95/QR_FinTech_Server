@@ -3,5 +3,5 @@ module.exports = {
     user     : 'root',
     password : 'mysql',
     port     : 3306,
-    database : 'coinlaundry'
+    database : 'dgb_db'
 };
