@@ -25,7 +25,7 @@
                     <h3 class="panel-title">Please Sign Up</h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-signin" method="post" action="/process/signup">
+                    <form class="form-signin" enctype="multipart/form-data" method="post" action="/upload">
                         <h2 class="form-signin-heading">회원 정보를 입력해 주십시오 </h2>
                         <br/>
                         <div class="form-group">
@@ -50,7 +50,7 @@
                                 <option>판매자</option>
                             </select>
                         </div>
-
+                        <input type="file" name="myfile" />
 
 
                         <button class="btn btn-lg btn-primary btn-block" type="submit">회원 가입</button>
