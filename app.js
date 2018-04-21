@@ -11,9 +11,6 @@ var loginRouter = require('./routes/login');
 
 var app = express();
 
-
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -31,6 +28,9 @@ var passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session()); //로그인 세션 유지
 
+var configPassport = require('./config/passport');
+configPassport(app,passport);
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -41,7 +41,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/upload', fileUpload);
 app.use('/id_check', idCheck);
+
 app.use('/login', loginRouter);
+app.use('/auth/facebook', passport.authenticate('facebook-login',{scope:'email'}));
+app.use('/auth/naver', passport.authenticate('naver-login',{scope:'email'}));
 
 app.use('/about', function(req, res, next) {
     res.render('about');
