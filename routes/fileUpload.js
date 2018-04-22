@@ -7,6 +7,8 @@ var maxFileSize = 3 * 1024 * 1024 + margin;
 
 var fs = require('fs');
 
+var userQuerys = require('../database/userQuerys');
+
 
 
 router.post('/profile', function(req,res){
@@ -21,22 +23,30 @@ router.post('/profile', function(req,res){
                 if(req.file == undefined)
                 {
                     console.log('파일첨부 안함');
+                    userQuerys.insertUser(req,res);
                 }
-                res.status(204).end();
-                fs.rename('./upload_files/profiles/'+req.file.filename,'./upload_files/profiles/'+req.body.email,function(err) //프로필 사진 파일 이름 == 이메일 아이디
+                else
                 {
-                    if(err)
-                        console.log(err);
-                    else
-                        console.log('file rename : ' + './upload_files/profiles/'+req.body.email);
+                    fs.rename('./upload_files/profiles/'+req.file.filename,'./upload_files/profiles/'+req.body.email,function(err) //프로필 사진 파일 이름 == 이메일 아이디
+                        {
+                            if(err)
+                                console.log(err);
+                            else
+                            {
+                                userQuerys.insertUser(req,res);
+                            }
+                        }
+                    );
                 }
-                );
+
+                //res.status(204).end();
+
+
             }
             else if( err.code == "LIMIT_FILE_SIZE")
             {
                 res.render('process/sign_up.ejs', {message : '파일 크기 초과 - 프로필 사진 파일은 3MB 이하만 가능합니다'});
             }
-
 
 		});
 
