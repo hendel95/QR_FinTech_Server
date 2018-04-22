@@ -58,7 +58,7 @@ app.use('/store', function(req, res, next) {
 });
 
 app.use('/user',isLoggedIn, function(req, res, next) {
-    res.render('dashboard/user');
+    res.render('dashboard/user', {req:req} );
 });
 
 app.use('/sign_up', function(req, res, next) {
