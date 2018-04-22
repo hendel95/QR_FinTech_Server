@@ -9,14 +9,7 @@ exports.insertUser = function(req,res) {
             res.redirect('/');
         }
         else {
-            //console.log('Error ', err);
-            res.json({
-                resultCode: 0,
-                cardNum: req.body.cardNum,
-                cost: req.body.cost,
-                balance: 0,
-                failCode: 1
-            });
+
         }
 
     });

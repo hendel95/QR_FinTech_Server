@@ -43,6 +43,7 @@ app.use('/upload', fileUpload);
 app.use('/id_check', idCheck);
 
 app.use('/login', loginRouter);
+
 app.use('/auth/facebook', passport.authenticate('facebook-login',{scope:'email'}));
 app.use('/auth/naver', passport.authenticate('naver-login',{scope:'email'}));
 
