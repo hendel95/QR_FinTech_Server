@@ -13,7 +13,7 @@ var userQuerys = require('../database/userQuerys');
 
 router.post('/profile', function(req,res){
 
-    var upload = multer({ dest: './upload_files/profiles/', limits: {fileSize:maxFileSize}}).single('myfile');
+    var upload = multer({ dest: './public/uploads/', limits: {fileSize:maxFileSize}}).single('myfile');
 		upload(req,res,function(err)
 		{
             if(err == undefined) //정상
@@ -22,21 +22,26 @@ router.post('/profile', function(req,res){
                 console.log(req.file); //form files
                 if(req.file == undefined)
                 {
-                    console.log('파일첨부 안함');
+                    //console.log('파일첨부 안함');
+                    req.file = '';
+                    req.file.filename = '';
                     userQuerys.insertUser(req,res);
                 }
                 else
                 {
+                    userQuerys.insertUser(req,res);
+                    /*
                     fs.rename('./upload_files/profiles/'+req.file.filename,'./upload_files/profiles/'+req.body.email,function(err) //프로필 사진 파일 이름 == 이메일 아이디
                         {
                             if(err)
                                 console.log(err);
                             else
                             {
-                                userQuerys.insertUser(req,res);
+
                             }
                         }
                     );
+                    */
                 }
 
                 //res.status(204).end();

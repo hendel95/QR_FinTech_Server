@@ -76,6 +76,10 @@
                             <input type="text" name="name" id="inputName" class="form-control" placeholder="이름" required>
                         </div>
                         <div class="form-group">
+                            <label for="inputName" class="sr-only">NickName</label>
+                            <input type="text" name="nickname" id="nickname" class="form-control" placeholder="닉네임" required>
+                        </div>
+                        <div class="form-group">
                             <label for="inputTel" class="sr-only">Phone</label>
                             <input type="tel" name="phone" id="inputTel" class="form-control" placeholder="전화번호" required>
                         </div>
@@ -89,6 +93,12 @@
                             <input type="file" name="myfile" />
                             <label> 프로필 사진 등록 (3MB 이하) </label>
                         </div>
+
+                        <div class="form-group">
+                            <label for="inputTel" class="sr-only">Phone</label>
+                            <textarea rows="5" name="about" id="about" class="form-control" placeholder="자기소개" required > </textarea>
+                        </div>
+
                         <button class="btn btn-lg btn-primary btn-block" type="submit">회원 가입</button>
                         <br/>
                         <a href="/">로그인 화면</a>

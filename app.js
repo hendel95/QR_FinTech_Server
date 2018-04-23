@@ -8,8 +8,12 @@ var indexRouter = require('./routes/index');
 var fileUpload = require('./routes/fileUpload');
 var idCheck = require('./routes/id_check');
 var loginRouter = require('./routes/login');
+var userRouter = require('./routes/user');
 
 var app = express();
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -57,9 +61,8 @@ app.use('/store', function(req, res, next) {
     res.render('store');
 });
 
-app.use('/user',isLoggedIn, function(req, res, next) {
-    res.render('dashboard/user', {req:req} );
-});
+
+app.use('/user',isLoggedIn, userRouter);
 
 app.use('/sign_up', function(req, res, next) {
     res.render('process/sign_up.ejs', {message : ''});
