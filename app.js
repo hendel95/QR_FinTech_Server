@@ -41,6 +41,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var QRCode = require('qrcode');
+app.use('/qrcode/:qrcode',function (req, res, next)
+    {
+        var inputStr = req.params.qrcode;
+        QRCode.toDataURL(inputStr,function (err, url) {
+            var data = url.replace(/.*,/,'');
+            var img = new Buffer(data,'base64');
+            res.writeHead(200,{
+                'Content-Type': 'image/png',
+                'Content-Length': img.length
+            });
+            res.end(img);
+        })
+    }
+);
+
 //app.use('/upload',fileUpload);
 app.use('/', indexRouter);
 app.use('/upload', fileUpload);
@@ -60,7 +76,6 @@ app.use('/products', function(req, res, next) {
 app.use('/store', function(req, res, next) {
     res.render('store');
 });
-
 
 app.use('/user',isLoggedIn, userRouter);
 
