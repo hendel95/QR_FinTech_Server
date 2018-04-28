@@ -9,7 +9,7 @@ exports.insertUser = function(req,res) {
             res.redirect('/');
         }
         else {
-
+            res.render('process/sign_up.ejs', {message : '아이디 중복 여부를 확인해 주십시오 : ' + err});
         }
 
     });
