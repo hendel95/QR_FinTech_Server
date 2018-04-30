@@ -9,11 +9,10 @@ var fileUpload = require('./routes/fileUpload');
 var idCheck = require('./routes/id_check');
 var loginRouter = require('./routes/login');
 var userRouter = require('./routes/user');
+var shopRouter = require('./routes/shop');
+var mobileRouter = require('./routes/mobile');
 
 var app = express();
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -77,7 +76,14 @@ app.use('/store', function(req, res, next) {
     res.render('store');
 });
 
+var productsRouter = require('./routes/products');
+//로그인 필요로 하는 페이지 접근
 app.use('/user',isLoggedIn, userRouter);
+app.use('/shop',isLoggedIn, shopRouter);
+app.use('/product',isLoggedIn, productsRouter);
+// 모바일 rest 접근
+app.use('/mobile', mobileRouter);
+
 
 app.use('/sign_up', function(req, res, next) {
     res.render('process/sign_up.ejs', {message : ''});

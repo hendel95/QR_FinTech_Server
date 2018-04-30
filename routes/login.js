@@ -18,4 +18,6 @@ router.get('/fail', function(req, res) {
 var passport = require('passport');
 router.post('/',passport.authenticate('local-login',{successRedirect: '/user', failureRedirect: '/login/fail'}));
 
+router.post('/mobile',passport.authenticate('local-login',{successRedirect: '/mobile/user', failureRedirect: '/mobile/fail'}));
+
 module.exports = router;

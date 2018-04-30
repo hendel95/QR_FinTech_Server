@@ -23,7 +23,83 @@
 
 <body class="">
 <div class="wrapper">
-    <% include sidebar.ejs %>
+    <div class="collapse" id="list">
+        abab
+        abab
+        abab
+    </div>
+
+    <!-- 사이드바 메뉴 -->
+    <div class="sidebar" data-color="azure" data-background-color="white" data-image="../assets/img/sidebar-1.jpg"  id="navigation" style="">
+        <!--
+    Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+    Tip 2: you can also add an image using data-image tag
+    -->
+        <div class="logo">
+            <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+                DGB_QR
+            </a>
+        </div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li class="nav-item ">
+                    <a class="nav-link" href="../examples/dashboard.html">
+                        <i class="material-icons">dashboard</i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item  active">
+                    <a class="nav-link" href="/user"  style="background-color: #2196f3; box-shadow:0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(33,150,243,0.4)">
+                        <i class="material-icons">person</i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shop">
+                        <i class="material-icons">person</i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="../examples/table.html">
+                        <i class="material-icons">content_paste</i>
+                        <p>Table List</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="../examples/typography.html">
+                        <i class="material-icons">library_books</i>
+                        <p>Typography</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="../examples/icons.html">
+                        <i class="material-icons">bubble_chart</i>
+                        <p>Icons</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="../examples/maps.html">
+                        <i class="material-icons">location_ons</i>
+                        <p>Maps</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="../examples/notifications.html">
+                        <i class="material-icons">notifications</i>
+                        <p>Notifications</p>
+                    </a>
+                </li>
+                <li class="nav-item active-pro">
+                    <a class="nav-link" href="../examples/upgrade.html">
+                        <i class="material-icons">unarchive</i>
+                        <p>Upgrade to PRO</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <div class="main-panel">
         <!-- Navbar -->
@@ -46,9 +122,47 @@
         <div class="content" >
             <div class="container-fluid">
                 <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-profile">
+                            <div class="card-avatar">
+                                <a href="">
+                                    <img class="img" src="<% if( rows[0].img == undefined) {%>/img/default.jpg<%
+                                    }
+                                    else
+                                    {
+                                    %>/uploads/<%=rows[0].img %><%}%>" />
+
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-category text-gray"><%=rows[0].name %> / <%=rows[0].nickname %></h6>
+                                <h4 class="card-title"><%= req.user.email %></h4>
+                                <p class="card-description">
+                                    <%= rows[0].about %>
+                                </p>
+                                <img class="img" src="/qrcode/<%= req.user.email %>"/><br/>
+
+                                <a href="#pablo" class="btn btn-round" style="background-color: #2196f3; border-color: #2196f3">QR 공유하기</a>
+                            </div>
+                        </div>
+                        <div class="card card-stats">
+                            <div class="card-header card-header-success card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">content_copy</i>
+                                </div>
+                                <p class="card-category">잔액</p>
+                                <h3 class="card-title"><%= rows[0].balance %>원</h3>
+                            </div>
+                            <div class="card-footer">
+
+                                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header card-header-primary">
+                        <div class="card" >
+                            <div class="card-header card-header-info" style="    background: linear-gradient(60deg, #2196f3, #2196f3);  box-shadow:0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(33,150,243,0.4)">
                                 <h4 class="card-title">개인 프로필</h4>
                                 <p class="card-category">개인 프로필 확인 및 수정 가능</p>
                             </div>
@@ -88,34 +202,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating">Adress</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating">City</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating">Country</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating">Postal Code</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -126,35 +213,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                                    <button type="submit" class="btn btn-info pull-right" style="background-color: #2196f3; border-color: #2196f3">프로필 저장</button>
                                     <div class="clearfix"></div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card card-profile">
-                            <div class="card-avatar">
-                                <a href="#pablo">
-                                    <img class="img" src="<% if( rows[0].img == undefined) {%>/img/default.jpg<%
-                                    }
-                                    else
-                                    {
-                                        %>/uploads/<%=rows[0].img %><%}%>" />
 
-                                </a>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="card-category text-gray"><%=rows[0].name %> / <%=rows[0].nickname %></h6>
-                                <h4 class="card-title"><%= req.user.email %></h4>
-                                <p class="card-description">
-                                    <%= rows[0].about %>
-                                </p>
-                                <img class="img" src="/qrcode/<%= req.user.email %>"/><br/>
-                                <a href="#pablo" class="btn btn-primary btn-round">프로필 공유하기</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -212,39 +277,6 @@
 <!-- demo init -->
 <script src="../assets/js/plugins/demo.js"></script>
 <!--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  -->
 
 </html>

@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-var userQuery = require('../database/userQuerys');
+var Query = require('../database/productQuerys');
 
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    userQuery.selectUser(req,res);
+    Query.selectProducts(req,res);
     //res.render('dashboard/user', {req:req} );
 });
 

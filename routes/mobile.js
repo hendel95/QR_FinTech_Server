@@ -5,9 +5,12 @@ var userQuery = require('../database/userQuerys');
 
 
 /* GET home page. */
-router.get('/', function(req, res) {
-    userQuery.selectUser(req,res);
-    //res.render('dashboard/user', {req:req} );
+router.get('/user', function(req, res) {
+    userQuery.selectUserInMobile(req,res);
+});
+
+router.get('/fail', function(req, res) {
+    res.json({result : 0});
 });
 
 module.exports = router;
