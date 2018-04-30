@@ -57,4 +57,9 @@ router.post('/profile', function(req,res){
 
 });
 
+var productQuerys = require('../database/productQuerys');
+router.post('/product', function(req,res) {
+    productQuerys.insertProduct(req,res);
+});
+
 module.exports = router;

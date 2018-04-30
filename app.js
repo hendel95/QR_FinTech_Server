@@ -77,10 +77,16 @@ app.use('/store', function(req, res, next) {
 });
 
 var productsRouter = require('./routes/products');
+var dashboard = require('./routes/dashboard');
 //로그인 필요로 하는 페이지 접근
 app.use('/user',isLoggedIn, userRouter);
 app.use('/shop',isLoggedIn, shopRouter);
 app.use('/product',isLoggedIn, productsRouter);
+app.use('/dashboard',isLoggedIn, dashboard);
+app.use('/product_upload',isLoggedIn, function(req, res, next) {
+    res.render('process/product_upload.ejs', {message : '', req:req });
+});
+
 // 모바일 rest 접근
 app.use('/mobile', mobileRouter);
 
